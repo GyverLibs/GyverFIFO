@@ -1,3 +1,5 @@
+This is an automatic translation, may be incorrect in some places. See sources and examples!
+
 # GyverFIFO
 Lightweight Universal Ring Buffer for Arduino
 - Read, write, clear
