@@ -13,27 +13,27 @@
 
     Версии:
     v1.0 - релиз
+    v1.1 - исправлено переполнение при >255 элементов
 */
 
-#ifndef GyverFIFO_h
-#define GyverFIFO_h
+#ifndef _GyverFIFO_h
+#define _GyverFIFO_h
 template < typename TYPE, int SIZE >
 class GyverFIFO {
 public:
     // запись в буфер. Вернёт true при успешной записи
     bool write(TYPE newVal) {
-        uint8_t i = (head + 1) % SIZE;  // положение нового значения в буфере
-        if (i != tail) {         		// если есть местечко
-            buffer[head] = newVal; 		// пишем в буфер
-            head = i;              		// двигаем голову
-            return true;
-        } else return false;
+        int i = (head + 1) % SIZE;      // положение нового значения в буфере
+        if (i != tail) {                // если есть местечко
+            buffer[head] = newVal;      // пишем в буфер
+            head = i;                   // двигаем голову
+            return 1;
+        } else return 0;
     }
     
     // доступность для записи (свободное место)
     bool availableForWrite() {
-        if ((head + 1) % SIZE != tail) return true;
-        else return false;
+        return (head + 1) % SIZE != tail;
     }
 
     // чтение из буфера
