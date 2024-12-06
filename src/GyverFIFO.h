@@ -23,44 +23,44 @@ class GyverFIFO {
 public:
     // запись в буфер. Вернёт true при успешной записи
     bool write(TYPE newVal) {
-        int i = (head + 1) % SIZE;      // положение нового значения в буфере
-        if (i != tail) {                // если есть местечко
-            buffer[head] = newVal;      // пишем в буфер
-            head = i;                   // двигаем голову
+        if (count < SIZE) {                           // если буфер не переполнен
+            buffer[(head + count++) % SIZE] = newVal; // пишем в конец очереди и увеличиваем количество
             return 1;
         } else return 0;
     }
     
     // доступность для записи (свободное место)
     bool availableForWrite() {
-        return (head + 1) % SIZE != tail;
+        return count < SIZE;
     }
 
-    // чтение из буфера
+    // чтение из буфера. Если буфер пуст, поведение не определено
     TYPE read() {
-        if (head == tail) return 0;   // буфер пуст
-        TYPE val = buffer[tail];      // берём с хвоста
-        tail = (tail + 1) % SIZE;     // хвост двигаем
-        return val;                   // возвращаем
+        TYPE val = buffer[head];          // берём с головы
+        if (count) {                      // если очередь не пуста
+            head = (head + 1) % SIZE;     // голову двигаем
+            count--;                      // уменьшаем количество
+        }
+        return val;                       // возвращаем
     }
 
     // возвращает крайнее значение без удаления из буфера
     TYPE peek() {
-        return buffer[tail];
+        return buffer[head];
     }
 
     // вернёт количество непрочитанных элементов
     int available() {
-        return (SIZE + head - tail) % SIZE;
+        return count;
     }
 
     // "очистка" буфера
     void clear() {
-        head = tail = 0;
+        count = 0;
     }
 
 private:
     TYPE buffer[SIZE];
-    int head = 0, tail = 0;
+    int head = 0, count = 0;
 };
 #endif

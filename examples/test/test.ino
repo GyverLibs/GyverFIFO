@@ -9,6 +9,10 @@ void setup() {
   buf.write(12);
   buf.write(34);
   buf.write(56);
+  for (int i = 3; i < 16; i++) {
+    buf.write(i);
+  }
+  Serial.println(buf.availableForWrite());
   Serial.println(buf.available());
   while (buf.available()) {
     Serial.println(buf.read());
