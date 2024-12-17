@@ -6,6 +6,9 @@
 
 [![Foo](https://img.shields.io/badge/ПОДПИСАТЬСЯ-НА%20ОБНОВЛЕНИЯ-brightgreen.svg?style=social&logo=telegram&color=blue)](https://t.me/GyverLibs)
 
+|⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️<br><br>**БИБЛИОТЕКА АРХИВИРОВАНА И СТАЛА ЧАСТЬЮ БИБЛИОТЕКИ [GTL](https://github.com/GyverLibs/GTL)**<br><br>⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️|
+| --- |
+
 # GyverFIFO
 Лёгкий универсальный кольцевой буфер для Arduino
 - Чтение, запись, очистка
